@@ -1,0 +1,10 @@
+Bigrock	1	42.78
+Smolrock	2	94.85
+Smollerrock	3	785.6
+Therock	4	6513.22
+Shinyrock	5	2.5
+Bluerock	6	1651.64
+Redrock	7	489.56
+Greenrock	8	4956.15
+WillSmithsrock	9	9999.99
+Norock	10	31315.22
