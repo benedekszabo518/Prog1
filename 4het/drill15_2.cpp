@@ -6,41 +6,53 @@ using namespace std;
 class Person {
     public: 
             Person(){}
-            Person(string n, int a) : n{n}, a{a}{
-                if(a<0 || 0>= 150){
+            Person(string first_name, string second_name, int a) : first_name{first_name}, second_name{second_name}, a{a}{
+                int aa = a;
+                if(a<0 || a>= 150){
                     throw runtime_error("Invalid age in Person");
                 }
-            /*string chara = ";:'[]*&^%$#@!";
-            for(int i=0; n.size(); ++i)
-                for(int j=0; chara.size(); ++j)
-                    if(n[i]==chara[j])
-                            throw runtime_error("Invalid name in Person");
-            */
+                string fullname = first_name + second_name;
+                for(char c: fullname) {
+                    switch(c) {
+                        case ';': case ':': case '"':
+                        case '[': case ']': case '*':
+                        case '&': case '^': case '%':
+                        case '$': case '#': case '@':
+                        case '!':
+                            throw runtime_error("Person(): bad char in names");
+                            break;
+                        default : break;
+                    }
+                }
             };
-            string name() const{return n;}
+            string first() const{return first_name;}
+            string second() const{return second_name;}
             int age() const{return a;}
+            
     private:
-            string n;
+            string first_name;
+            string second_name;
             int a;
-}
+};
 ostream& operator <<(ostream& os, const Person& p)
 {
-    return os <<p.name() << " " << p.age();
+    return os <<p.first() << " " << p.second() << " " << p.age();
 }
 istream& operator >>(istream& is, Person& p)
 {
-    string n;
+    string n1;
+    string n2;
     int a;
 
-    is >> n >> a;
-    p=Person(n,a);
+    is >> n1 >> n2 >> a;
+    p=Person(n1,n2,a);
 
     return is;
 }
 
 int main () 
 {
-    Person p = Person("Goofy",63);
+    Person p = Person("Goofy","Smol",63);
 
     //cout << p.name << " " << p.age << endl;
     cout << p << endl;
@@ -52,7 +64,7 @@ int main ()
     vector<Person> vec;
     for(Person p; cin >> p;)
     {
-        if(p.name()=="end") break;
+        if(p.first()=="end" || p.second()=="end") break;
         vec.push_back(p);
     }
     for(Person P: vec)
